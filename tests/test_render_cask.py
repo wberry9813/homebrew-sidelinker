@@ -16,7 +16,7 @@ class CaskTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             artifact = pathlib.Path(folder) / "SideLinker-Mac-1.1.0-21.dmg"
             artifact.write_bytes(b"fixture: not a release")
-            uri = "https://github.com/wberry9813/SideLinker/releases/download/v1.1.0/SideLinker-Mac-1.1.0-21.dmg"
+            uri = "https://github.com/wberry9813/SideLinker-Home/releases/download/v1.1.0/SideLinker-Mac-1.1.0-21.dmg"
             content = render_module.render("1.1.0", uri, artifact)
             self.assertIn('app "SideLinker Mac.app"', content)
             import hashlib
@@ -29,7 +29,7 @@ class CaskTests(unittest.TestCase):
             artifact = pathlib.Path(folder) / "demo.dmg"
             artifact.write_bytes(b"fixture")
             with self.assertRaises(ValueError):
-                render_module.render("1.1.0", "https://github.com/wberry9813/SideLinker/releases/download/v2.0/SideLinker-Mac-1.1.0-21.dmg", artifact)
+                render_module.render("1.1.0", "https://github.com/wberry9813/SideLinker-Home/releases/download/v2.0/SideLinker-Mac-1.1.0-21.dmg", artifact)
             with self.assertRaises(ValueError):
                 render_module.render("1.1.0", "https://example.com/release.dmg", artifact)
 

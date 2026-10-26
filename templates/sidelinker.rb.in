@@ -10,7 +10,7 @@ cask "sidelinker" do
   url "__URL__"
   name "SideLinker"
   desc "Use iPad or iPhone as a display for your Mac"
-  homepage "https://github.com/wberry9813/SideLinker"
+  homepage "https://github.com/wberry9813/SideLinker-Home"
 
   app "SideLinker Mac.app"
 

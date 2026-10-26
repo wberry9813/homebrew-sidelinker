@@ -19,7 +19,6 @@ class CaskTests(unittest.TestCase):
             uri = "https://github.com/wberry9813/SideLinker/releases/download/v1.1.0/SideLinker-Mac-1.1.0-21.dmg"
             content = render_module.render("1.1.0", uri, artifact)
             self.assertIn('app "SideLinker Mac.app"', content)
-            self.assertIn("a05b3a3", "a05b3a3")  # no hard-coded published artifact
             import hashlib
             self.assertIn(hashlib.sha256(artifact.read_bytes()).hexdigest(), content)
             self.assertNotIn("__SHA256__", content)

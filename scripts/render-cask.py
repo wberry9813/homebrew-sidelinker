@@ -19,7 +19,7 @@ def render(version: str, url: str, dmg: Path) -> str:
     if not re.fullmatch(r"[0-9]+(?:\.[0-9]+){1,3}(?:[-.][0-9A-Za-z.-]+)?", version):
         raise ValueError("Invalid version; use a release version (e.g. 1.1.0)")
     parsed = urlparse(url)
-    expected_prefix = "https://github.com/wberry9813/SideLinker/releases/download/"
+    expected_prefix = "https://github.com/wberry9813/SideLinker-Home/releases/download/"
     if parsed.scheme != "https" or parsed.netloc != "github.com" or not url.startswith(expected_prefix):
         raise ValueError("URL must point to a public SideLinker GitHub release asset")
     if parsed.query or parsed.fragment or not parsed.path.lower().endswith(".dmg"):

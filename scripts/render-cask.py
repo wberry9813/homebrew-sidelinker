@@ -25,12 +25,12 @@ def render(version: str, url: str, dmg: Path) -> str:
     if parsed.query or parsed.fragment or not parsed.path.lower().endswith(".dmg"):
         raise ValueError("Expected a direct .dmg release asset URL without query/fragment")
     parts = parsed.path.split("/")
-    if len(parts) != 8 or parts[5] != "download" or not parts[6] or not parts[7]:
+    if len(parts) != 7 or parts[4] != "download" or not parts[5] or not parts[6]:
         raise ValueError("Expected /releases/download/TAG/FILENAME.dmg")
-    tag = unquote(parts[6])
+    tag = unquote(parts[5])
     if tag not in (version, "v" + version):
         raise ValueError("Release tag must match the supplied version")
-    filename = unquote(parts[7])
+    filename = unquote(parts[6])
     if not filename.startswith("SideLinker-Mac-" + version + "-") or not filename.endswith(".dmg"):
         raise ValueError("DMG release filename must match SideLinker-Mac-VERSION-BUILD.dmg")
     if not dmg.is_file() or not dmg.name.endswith(".dmg"):

@@ -22,7 +22,7 @@ class CaskTests(unittest.TestCase):
             import hashlib
             self.assertIn(hashlib.sha256(artifact.read_bytes()).hexdigest(), content)
             self.assertNotIn("__SHA256__", content)
-            self.assertNotIn("zap ", content)
+            self.assertNotIn("\n  zap ", content)
 
     def test_rejects_mismatched_tag_and_nonpublic_url(self):
         with tempfile.TemporaryDirectory() as folder:

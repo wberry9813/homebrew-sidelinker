@@ -1,0 +1,26 @@
+name: Validate Cask Preparation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  offline-checks:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate renderer and release guards
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Check rendered Cask syntax when published
+        run: |
+          if [ -f Casks/sidelinker.rb ]; then
+            ruby -c Casks/sidelinker.rb
+          else
+            echo "No active cask yet; waiting for a verified public SideLinker Mac release."
+          fi

@@ -33,8 +33,14 @@ class CaskTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 render_module.render("1.1.0", "https://example.com/release.dmg", artifact)
 
-    def test_absence_of_active_cask_until_release(self):
-        self.assertFalse((ROOT / "Casks" / "sidelinker.rb").exists())
+    def test_active_cask_never_contains_placeholders(self):
+        active = ROOT / "Casks" / "sidelinker.rb"
+        if active.exists():
+            text = active.read_text(encoding="utf-8")
+            self.assertNotIn("__SHA256__", text)
+            self.assertNotIn("__URL__", text)
+            self.assertNotIn("__VERSION__", text)
+        self.assertTrue((ROOT / "templates" / "sidelinker.rb.in").exists())
 
 if __name__ == "__main__":
     unittest.main()
